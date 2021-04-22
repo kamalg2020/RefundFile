@@ -1,0 +1,1598 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_LogFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="io_LogsDT" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_RFReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_ReportParameterPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_AgingReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_VDReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_HRReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_DumpDupReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_NonParticipationReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_DumpGreenReportPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_MainFileTemplatePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_MainFileSavePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_DoNotRefundFilePath" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1145,7138</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="33">
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Management.Automation</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>TimeSpan2</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="1155,7033" sap2010:WorkflowViewState.IdRef="Sequence_9">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:Browser" Name="BrowserSession" />
+      <Variable x:TypeArguments="x:String" Name="RFFileName" />
+      <Variable x:TypeArguments="x:String" Name="VDFileName" />
+      <Variable x:TypeArguments="x:String" Name="DNRFileName" />
+      <Variable x:TypeArguments="x:String" Name="DumpDupFileName" />
+      <Variable x:TypeArguments="x:String" Name="DumpGreenFileName" />
+      <Variable x:TypeArguments="x:String" Name="AgingReportScreenshotPath" />
+      <Variable x:TypeArguments="x:String" Name="RFReportScreenshotPath" />
+      <Variable x:TypeArguments="x:String" Name="VDReportScreenshotPath" />
+      <Variable x:TypeArguments="ui:Browser" Name="LeapBrowser" />
+      <Variable x:TypeArguments="x:String" Name="MainRefundFileName" />
+      <Variable x:TypeArguments="x:String" Name="AgingReportFileName" />
+      <Variable x:TypeArguments="x:String" Name="NonParFiileName" />
+      <Variable x:TypeArguments="x:Boolean" Name="BoolMainRefundFileNameExist" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1113,454" sap2010:WorkflowViewState.IdRef="CommentOut_24">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,376" sap2010:WorkflowViewState.IdRef="Sequence_56">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_MainFileSavePath+&quot;\Refund File &quot;+Now.ToString(&quot;MM dd yyyy&quot;)+&quot; sent &quot;+Now.ToString(&quot;MM dd yyyy&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy MainTemplate File" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="CopyFile_9" Overwrite="False" Path="[in_MainFileTemplatePath]">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CopyFile>
+          <Assign DisplayName="Assign MainRefundFileName" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[MainRefundFileName]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[in_MainFileSavePath+"\Refund File "+Now.ToString("MM dd yyyy")+" sent "+Now.ToString("MM dd yyyy")+".xlsx"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="TransferAndFormatMainRefundFileExcelSheets" DisplayName="InvokeTransferAndFormatMainRefundFileExcelSheets workflow" sap:VirtualizedContainerService.HintSize="262,93" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_32" UnSafe="False" WorkflowFileName="RefundFileManipulations\TransferAndFormatMainRefundFileExcelSheets.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+              </InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_StrOutputReportName" />
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">
+                <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_LogsDT" />
+              </InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogFilePath" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_AgingReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Aging Report\2021\Jan\27\tgrages_8428119_05_35_23.LIS</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_VDReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\VD\2021\Jan\25\VDReport25012021 07_39_01.xlsx</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_HRReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Hold Report\2021\Jan\25\Walden Hold Report_02_35_34.xlsx</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_DumpDupReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\DumpDup DumpGreen\refbank-dumpdups-20210119.csv</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_NonParticipationReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\Non Participant\Disbursement &amp; Participation 20201218 - Copy.XLSX</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_DumpGreenReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\DumpDup DumpGreen\refbank-dumpgreen-20210119.csv</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_DoNotRefundReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\Do No Refund\DONEDONEDONEMaster DNR.xlsx270121 04_06_35.xlsx270121 04_32_50.xlsx280121 12_06_48.xlsx</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_RFReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\RF\2021\Jan\25\RFReport25012021 07_19_47.xlsx</Literal>
+              </InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="io_MainRefundFileName">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="MainRefundFileName" />
+              </InOutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="1113,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Opening applications...&quot;]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1113,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Description">Downloading all reports...</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LoginToBanner workflow" sap:VirtualizedContainerService.HintSize="1113,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_11" UnSafe="False" WorkflowFileName="Reusable\LoginToBanner.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+        <OutArgument x:TypeArguments="ui:Browser" x:Key="out_BannerBrowserSession">[BrowserSession]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1113,6042" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+      <TryCatch.Variables>
+        <Variable x:TypeArguments="x:String" Name="FileNameList" />
+        <Variable x:TypeArguments="x:String" Name="FileNumber" />
+      </TryCatch.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="1075,5815" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="TGRAGES_Status" />
+            <Variable x:TypeArguments="x:Boolean" Name="BoolMacroExcelFileExists" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="609,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Description">Aging Report process started</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SaveTGRAGESReport workflow" sap:VirtualizedContainerService.HintSize="609,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="ReportsExtraction\SaveTGRAGESReport.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_FileNumber">[FileNumber]</OutArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_FileNameList">[FileNameList]</OutArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="LogsDT">[io_LogsDT]</InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+              <InArgument x:TypeArguments="ui:Browser" x:Key="in_BannerBrowserSession">[BrowserSession]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_StrAgingReportParameterFilePath">[AgingReportScreenshotPath]</OutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ReportParameterPath">[in_ReportParameterPath]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <TryCatch DisplayName="Try Downloading RFReport Catch" sap:VirtualizedContainerService.HintSize="609,361" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke DownloadRFReport workflow" sap:VirtualizedContainerService.HintSize="349,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="ReportsExtraction\DownloadRFVDReport.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_TCodeAccountDetailQuery">TGIACCD</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportParametersPath">[in_ReportParameterPath]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  <InArgument x:TypeArguments="ui:Browser" x:Key="in_BrowserSession">[BrowserSession]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportType_RForVD">RF</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_RFReportPath]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_FilePathWithName">[RFFileName]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_ScreenshotPath">[RFReportScreenshotPath]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading RF Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="Business Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                    <ui:SendMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                    </ui:SendMail.Files>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SendMail>
+                </ActivityAction>
+              </Catch>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_5">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading RF Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_2" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="System Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                    <ui:SendMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                    </ui:SendMail.Files>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SendMail>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <TryCatch DisplayName="Try Downloading VD ReportCatch" sap:VirtualizedContainerService.HintSize="609,51" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke DownloadRFReport workflow" sap:VirtualizedContainerService.HintSize="349,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="ReportsExtraction\DownloadRFVDReport.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_TCodeAccountDetailQuery">TGIACCD</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportParametersPath">[in_ReportParameterPath]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  <InArgument x:TypeArguments="ui:Browser" x:Key="in_BrowserSession">[BrowserSession]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportType_RForVD">VD</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_ReportPath">[in_VDReportPath]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_FilePathWithName">[VDFileName]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_ScreenshotPath">[VDReportScreenshotPath]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="400,21" sap2010:WorkflowViewState.IdRef="Catch`1_6">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading VD Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_3" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="Business Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                    <ui:SendMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                    </ui:SendMail.Files>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SendMail>
+                </ActivityAction>
+              </Catch>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,214" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading VD Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_4" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="System Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                    <ui:SendMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                    </ui:SendMail.Files>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SendMail>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <TryCatch DisplayName="Try catch DownloadHoldReport" sap:VirtualizedContainerService.HintSize="609,605" sap2010:WorkflowViewState.IdRef="TryCatch_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Sequence DisplayName="DownloadHoldReport" sap:VirtualizedContainerService.HintSize="376,356" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LoginToLeap workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_28" UnSafe="False" WorkflowFileName="Reusable\LoginToLeap.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                    <OutArgument x:TypeArguments="ui:Browser" x:Key="out_LeapBrowserSession">[LeapBrowser]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LeapHoldReport workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_29" UnSafe="False" WorkflowFileName="ReportsExtraction\LeapHoldReport.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                      <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogFilePath" />
+                    </InArgument>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogDT">
+                      <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_LogsDT" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="io_HoldReportFullPath">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="in_HRReportPath" />
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="ui:Browser" x:Key="in_LeapBrowserSession">
+                      <mva:VisualBasicValue x:TypeArguments="ui:Browser" ExpressionText="LeapBrowser" />
+                    </InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_13">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading RF Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_7" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="Business Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                    <ui:SendMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                    </ui:SendMail.Files>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SendMail>
+                </ActivityAction>
+              </Catch>
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_14">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading VD Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_8" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="System Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                    <ui:SendMail.Files>
+                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                    </ui:SendMail.Files>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:SendMail>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="609,221" sap2010:WorkflowViewState.IdRef="CommentOut_26">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch DisplayName="Try Copy DNR File Catch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_6">
+                  <TryCatch.Variables>
+                    <Variable x:TypeArguments="s:String[]" Name="DNRFilesList" />
+                    <Variable x:TypeArguments="x:String" Name="CurrentDNRFileName" />
+                  </TryCatch.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch.Try>
+                    <Sequence DisplayName="DNRFile Copying Sequence" sap:VirtualizedContainerService.HintSize="526,994" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign DisplayName="Assign DNRFilesList" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[DNRFilesList]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("RFV_DNRSharepointLocation").ToString)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[DNRFilesList.Length = 0]" DisplayName="If DNRFileList Empty" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_2">
+                        <If.Then>
+                          <Throw Exception="[new BusinessRuleException(&quot;Do Not Refund file not found in the Sharepoint Location&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                        </If.Then>
+                      </If>
+                      <Assign DisplayName="Assign CurrentDNRFileName" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[CurrentDNRFileName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[DNRFilesList(0).Substring(DNRFilesList(0).LastIndexOf("\")+1)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_DoNotRefundFilePath+&quot;\&quot;+CurrentDNRFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy DNR File SharedDrive" sap:VirtualizedContainerService.HintSize="484,157" sap2010:WorkflowViewState.IdRef="CopyFile_6" Overwrite="False" Path="[DNRFilesList(0)]" />
+                      <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;RFV_DNRSharepointLocation&quot;).ToString+&quot;\DONE&quot;+CurrentDNRFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Move DNR File To Done Folder" sap:VirtualizedContainerService.HintSize="484,157" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="False" Path="[DNRFilesList(0)]" />
+                      <Assign DisplayName="Assign DNRFileName" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[DNRFileName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[in_DoNotRefundFilePath+"\"+CurrentDNRFileName+Now.ToString("ddMMyy HH_mm_ss")+".xlsx"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="577,618" sap2010:WorkflowViewState.IdRef="Catch`1_8">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="HandleExceptionForCopyingDNR" sap:VirtualizedContainerService.HintSize="571,549" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="529,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Status">Error</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Description">["Error occurred while copying Do Not Refund File. Error is "+exception.Message]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <If Condition="[DNRFilesList.Length &gt; 0]" sap:VirtualizedContainerService.HintSize="529,305" sap2010:WorkflowViewState.IdRef="If_3">
+                            <If.Then>
+                              <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;RFV_DNRSharepointLocation&quot;).ToString+&quot;\ERROR\&quot;+CurrentDNRFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Move DNR File To error Folder" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="MoveFile_3" Overwrite="False" Path="[DNRFilesList(0)]" />
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="609,221" sap2010:WorkflowViewState.IdRef="CommentOut_27">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch DisplayName="Try Copy DumpDupFile Catch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+                  <TryCatch.Variables>
+                    <Variable x:TypeArguments="x:String" Name="CurrentDumpDupFileName" />
+                    <Variable x:TypeArguments="s:String[]" Name="DumpDupFilesList" />
+                  </TryCatch.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch.Try>
+                    <Sequence DisplayName="DumpDupFile Copying Sequence" sap:VirtualizedContainerService.HintSize="476,731" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign DisplayName="Assign DumpDupFilesList" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[DumpDupFilesList]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("RFV_DumpDupSharepointLocation").ToString, "dumpdup")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[DumpDupFilesList.Length = 0]" DisplayName="If DumpDupFilesListEmpty" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="If_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Throw Exception="[new BusinessRuleException(&quot;Dump Dup file not found in the Sharepoint Location&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                        </If.Then>
+                      </If>
+                      <Assign DisplayName="Assign CurrentDumpDupFileName" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[CurrentDumpDupFileName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[DumpDupFilesList(0).Substring(DumpDupFilesList(0).LastIndexOf("\")+1)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_DumpDupReportPath+&quot;\&quot;+CurrentDumpDupFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy DumpDup File To SharedDrive" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="CopyFile_7" Overwrite="False" Path="[DumpDupFilesList(0)]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:CopyFile>
+                      <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;RFV_DumpDupSharepointLocation&quot;).ToString+&quot;\DONE\&quot;+CurrentDumpDupFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Move DumpDup File to Done Folder" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="False" Path="[DumpDupFilesList(0)]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MoveFile>
+                      <Assign DisplayName="Assign DumpDupFileName" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[DumpDupFileName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[in_DumpDupReportPath+"\"+CurrentDumpDupFileName+Now.ToString("ddMMyy HH_mm_ss")+".xlsx"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="480,21" sap2010:WorkflowViewState.IdRef="Catch`1_9">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="HandleExceptionForCopyingDumpDup" sap:VirtualizedContainerService.HintSize="571,295" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="529,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_22" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Status">Error</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Description">["Error occurred while copying DumpDup File. Error is "+exception.Message]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <If Condition="[DumpDupFilesList.Length &gt; 0]" sap:VirtualizedContainerService.HintSize="529,51" sap2010:WorkflowViewState.IdRef="If_5">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;RFV_DumpDupSharepointLocation&quot;).ToString+&quot;\ERROR\&quot;+CurrentDumpDupFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="MoveFile_5" Overwrite="False" Path="[DumpDupFilesList(0)]" />
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="609,221" sap2010:WorkflowViewState.IdRef="CommentOut_28">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch DisplayName="Try Copy DumpGreenFile Catch" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_8">
+                  <TryCatch.Variables>
+                    <Variable x:TypeArguments="x:String" Name="CurrentDumpGreenFileName" />
+                    <Variable x:TypeArguments="s:String[]" Name="DumpGreenFilesList" />
+                  </TryCatch.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch.Try>
+                    <Sequence DisplayName="DumpGreenFile Copying Sequence" sap:VirtualizedContainerService.HintSize="476,731" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign DisplayName="Assign DumpGreenFilesList" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[DumpGreenFilesList]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(in_Config("RFV_DumpGreenSharepointLocation").ToString, "dumpgreen")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[DumpGreenFilesList.Length = 0]" DisplayName="If DumpGreenFilesListEmpty" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="If_6">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Throw Exception="[new BusinessRuleException(&quot;DumpGreen file not found in the Sharepoint Location&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                        </If.Then>
+                      </If>
+                      <Assign DisplayName="Assign CurrentDumpGreenFileName" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[CurrentDumpGreenFileName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[DumpGreenFilesList(0).Substring(DumpGreenFilesList(0).LastIndexOf("\")+1)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_DumpGreenReportPath+&quot;\&quot;+CurrentDumpGreenFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy DumpGreen File To SharedDrive" sap:VirtualizedContainerService.HintSize="434,157" sap2010:WorkflowViewState.IdRef="CopyFile_8" Overwrite="False" Path="[DumpGreenFilesList(0)]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:CopyFile>
+                      <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;RFV_DumpGreenSharepointLocation&quot;).ToString+&quot;\DONE\&quot;+CurrentDumpGreenFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Move DumpGreen File to Done Folder" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="MoveFile_6" Overwrite="False" Path="[DumpGreenFilesList(0)]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:MoveFile>
+                      <Assign DisplayName="Assign DumpGreenFileName" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[DumpGreenFileName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[in_DumpGreenReportPath+"\"+CurrentDumpGreenFileName+Now.ToString("ddMMyy HH_mm_ss")+".xlsx"]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="480,21" sap2010:WorkflowViewState.IdRef="Catch`1_10">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="HandleExceptionForCopyingDumpGreen" sap:VirtualizedContainerService.HintSize="571,295" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="529,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Status">Error</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Description">["Error occurred while copying DumpGreen File. Error is "+exception.Message]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                          <If Condition="[DumpGreenFilesList.Length &gt; 0]" sap:VirtualizedContainerService.HintSize="529,51" sap2010:WorkflowViewState.IdRef="If_7">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <ui:MoveFile ContinueOnError="{x:Null}" Destination="[in_Config(&quot;RFV_DumpGreenSharepointLocation&quot;).ToString+&quot;\ERROR\&quot;+CurrentDumpGreenFileName+Now.ToString(&quot;ddMMyy HH_mm_ss&quot;)+&quot;.xlsx&quot;]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="MoveFile_7" Overwrite="False" Path="[DumpGreenFilesList(0)]" />
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+          <Sequence DisplayName="Copy MainTemplate File" sap:VirtualizedContainerService.HintSize="1033,726" sap2010:WorkflowViewState.IdRef="Sequence_49">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign MainRefundFileName" sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_17">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[MainRefundFileName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[in_MainFileSavePath+"\Refund File "+Now.ToString("MM dd yyyy")+" sent "+Now.ToString("MM dd yyyy")+".xlsx"]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:PathExists DisplayName="Path Exists" Exists="[BoolMainRefundFileNameExist]" sap:VirtualizedContainerService.HintSize="484,89" sap2010:WorkflowViewState.IdRef="PathExists_5" Path="[MainRefundFileName]" PathType="File" />
+            <If Condition="[BoolMainRefundFileNameExist]" sap:VirtualizedContainerService.HintSize="484,208" sap2010:WorkflowViewState.IdRef="If_17">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[MainRefundFileName]" />
+              </If.Then>
+            </If>
+            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[MainRefundFileName]" DisplayName="Copy MainTemplate File" sap:VirtualizedContainerService.HintSize="484,157" sap2010:WorkflowViewState.IdRef="CopyFile_10" Overwrite="False" Path="[in_MainFileTemplatePath]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CopyFile>
+          </Sequence>
+          <ui:PathExists DisplayName="Path Exists" Exists="[BoolMacroExcelFileExists]" sap:VirtualizedContainerService.HintSize="1033,89" sap2010:WorkflowViewState.IdRef="PathExists_6" Path="[in_Config(&quot;RFV_MacroParamaterScreenshotFilePath&quot;).ToString]" PathType="File" />
+          <If Condition="[BoolMacroExcelFileExists]" sap:VirtualizedContainerService.HintSize="1033,1024" sap2010:WorkflowViewState.IdRef="If_19">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <Sequence sap:VirtualizedContainerService.HintSize="788,876" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch DisplayName="Try catch Banner Report Screenshots" sap:VirtualizedContainerService.HintSize="746,693" sap2010:WorkflowViewState.IdRef="TryCatch_14">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <TryCatch.Try>
+                    <Sequence sap:VirtualizedContainerService.HintSize="708,444" sap2010:WorkflowViewState.IdRef="Sequence_62">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[AgingReportScreenshotPath isnot Nothing and RFReportScreenshotPath Isnot Nothing and VDReportScreenshotPath isnot Nothing]" sap:VirtualizedContainerService.HintSize="666,352" sap2010:WorkflowViewState.IdRef="If_18">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="421,204" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke BannerParametersScreenshots workflow" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_38" UnSafe="False" WorkflowFileName="ReportsExtraction\BannerParametersScreenshots.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_VDReportScreenshotFilepath">[VDReportScreenshotPath]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_AgingReportScreenshotFilePath">[AgingReportScreenshotPath]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_RFReportScreenshotFilePath">[RFReportScreenshotPath]</InArgument>
+                                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="io_RefundFile">[MainRefundFileName]</InOutArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Throw Exception="[new BusinessRuleException(&quot;Report Parameter file not found&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_12" />
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="712,21" sap2010:WorkflowViewState.IdRef="Catch`1_21">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                        </ActivityAction.Argument>
+                        <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading RF Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_15" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="Business Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                          <ui:SendMail.Files>
+                            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                          </ui:SendMail.Files>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:SendMail>
+                      </ActivityAction>
+                    </Catch>
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="712,21" sap2010:WorkflowViewState.IdRef="Catch`1_22">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ActivityAction x:TypeArguments="s:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                        <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading VD Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_16" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="System Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                          <ui:SendMail.Files>
+                            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                          </ui:SendMail.Files>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:SendMail>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="746,51" sap2010:WorkflowViewState.IdRef="CommentOut_29">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_63">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <TryCatch DisplayName="Try catch Banner Report Screenshots" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="TryCatch_15">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <TryCatch.Try>
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke TransferDownloadedAllReportsToRefundFileExcel workflow" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_39" UnSafe="False" WorkflowFileName="RefundFileManipulations\TransferDownloadedAllReportsToRefundFileExcel.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                              <OutArgument x:TypeArguments="x:String" x:Key="out_StrOutputReportName" />
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                              <InOutArgument x:TypeArguments="x:String" x:Key="io_RefundFile">[MainRefundFileName]</InOutArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_AgingReport">[AgingReportFileName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_VDReport">[VDFileName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_HRReport">[in_HRReportPath]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_DumpDupReport">[DumpDupFileName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_NonParticipationReport" />
+                              <InArgument x:TypeArguments="x:String" x:Key="in_DumpGreenReport">[DumpGreenFileName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_DoNotRefundReport">[DNRFileName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_RFReport">[RFFileName]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:InvokeWorkflowFile>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_23">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                              </ActivityAction.Argument>
+                              <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading RF Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_17" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="Business Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                                <ui:SendMail.Files>
+                                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                                </ui:SendMail.Files>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:SendMail>
+                            </ActivityAction>
+                          </Catch>
+                          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_24">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ActivityAction x:TypeArguments="s:Exception">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                              </ActivityAction.Argument>
+                              <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading VD Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_18" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="System Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                                <ui:SendMail.Files>
+                                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                                </ui:SendMail.Files>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:SendMail>
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                      </TryCatch>
+                    </Sequence>
+                  </ui:CommentOut.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CommentOut>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Throw Exception="[new BusinessRuleException(&quot;Macro screenshot excel file not found&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_13" />
+            </If.Else>
+          </If>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1033,51" sap2010:WorkflowViewState.IdRef="CommentOut_30">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,158" sap2010:WorkflowViewState.IdRef="Sequence_65">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence DisplayName="Banner Report Screenshots" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_52">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:PathExists DisplayName="Path Exists" Exists="[BoolMainRefundFileNameExist]" sap:VirtualizedContainerService.HintSize="567,89" sap2010:WorkflowViewState.IdRef="PathExists_3" Path="[MainRefundFileName]" PathType="File">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:PathExists>
+                  <If Condition="[BoolMainRefundFileNameExist]" sap:VirtualizedContainerService.HintSize="567,208" sap2010:WorkflowViewState.IdRef="If_15">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Else>
+                      <Throw Exception="[new  System.Exception(&quot;Unable to find downloaded main refund file&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_10" />
+                    </If.Else>
+                  </If>
+                  <TryCatch DisplayName="Try catch Banner Report Screenshots" sap:VirtualizedContainerService.HintSize="567,723" sap2010:WorkflowViewState.IdRef="TryCatch_13">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <TryCatch.Try>
+                      <Sequence sap:VirtualizedContainerService.HintSize="529,474" sap2010:WorkflowViewState.IdRef="Sequence_51">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:PathExists DisplayName="Path Exists" Exists="[BoolMacroExcelFileExists]" sap:VirtualizedContainerService.HintSize="487,51" sap2010:WorkflowViewState.IdRef="PathExists_4" Path="[in_Config(&quot;RFV_MacroParamaterScreenshotFilePath&quot;).ToString]" PathType="File">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:PathExists>
+                        <If Condition="[BoolMacroExcelFileExists]" sap:VirtualizedContainerService.HintSize="487,291" sap2010:WorkflowViewState.IdRef="If_16">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke TransferDownloadedAllReportsToRefundFileExcel workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_36" UnSafe="False" WorkflowFileName="RefundFileManipulations\TransferAndFormatMainRefundFileExcelSheets.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_StrOutputReportName" />
+                                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">[io_LogsDT]</InOutArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="io_RefundFile">[MainRefundFileName]</InOutArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_AgingReport">[AgingReportFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_VDReport">[VDFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_HRReport">[in_HRReportPath]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_DumpDupReport">[DumpDupFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_NonParticipationReport" />
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_DumpGreenReport">[DumpGreenFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_DoNotRefundReport">[DNRFileName]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_RFReport">[RFFileName]</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:InvokeWorkflowFile>
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Throw Exception="[new BusinessRuleException(&quot;Macro screenshot excel file not found&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_11" />
+                          </If.Else>
+                        </If>
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="533,21" sap2010:WorkflowViewState.IdRef="Catch`1_19">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                          </ActivityAction.Argument>
+                          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading RF Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_13" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="Business Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                            <ui:SendMail.Files>
+                              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                            </ui:SendMail.Files>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:SendMail>
+                        </ActivityAction>
+                      </Catch>
+                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="533,21" sap2010:WorkflowViewState.IdRef="Catch`1_20">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" TimeoutMS="{x:Null}" Body="[&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Hello,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Downloading VD Report has encountered exception. &lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Reason: &lt;/b&gt;&quot;+Exception.Message.ToString+&quot;&lt;br&gt;Kindly refer screenshot or logs for more details.&lt;/font&gt; &lt;/p&gt;&quot;+Environment.NewLine+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Thank you,&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;&lt;b&gt;Refund File Validation Bot&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='#1f497d'&gt;Laureate Education, Inc.&lt;br&gt;Bursar's Office&lt;br&gt;Samuel Morse Drive&lt;br&gt;Columbia, MD 21046&lt;br&gt;&quot;+in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString+&quot;&lt;br&gt;Telephone: 800-WALDENU (800-925-3368), Ext. 200-110-2437&lt;br&gt;Telephone: 612-WALDENU (International)&lt;br&gt;Fax: 410-209-8029&lt;/font&gt; &lt;/p&gt;&quot;+Environment.Newline+&quot;&lt;p &gt;&lt;font color='red'&gt;&lt;b&gt;This is an auto generated mail. Please do not reply to this mail.&lt;/b&gt;&lt;/font&gt; &lt;/p&gt;&quot;]" DisplayName="Send SMTP Mail Message" Email="[in_Config(&quot;RFV_EmailCredentials_Username&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendMail_14" IsBodyHtml="True" Password="[in_Config(&quot;RFV_EmailCredentials_Password&quot;).ToString]" Port="[Cint(in_Config(&quot;SI_InvoiceEmailPort&quot;).ToString)]" SecureConnection="Auto" Server="[in_Config(&quot;RFV_EmailServer&quot;).ToString]" Subject="System Exception - Refund File Validation Bot" To="[in_Config(&quot;RFV_NotificationEmailingList&quot;).ToString]">
+                            <ui:SendMail.Files>
+                              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+                            </ui:SendMail.Files>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:SendMail>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                </Sequence>
+              </Sequence>
+            </ui:CommentOut.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CommentOut>
+          <If Condition="[FileNameList IsNot Nothing and FileNumber isnot Nothing]" sap:VirtualizedContainerService.HintSize="1033,260" sap2010:WorkflowViewState.IdRef="If_1">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <If.Then>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke DownloadTGRAGESReport workflow" sap:VirtualizedContainerService.HintSize="370,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ReportsExtraction\DownloadTGRAGESReport.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="io_strFilenumber">[FileNumber]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="io_strFileNumberList">[FileNameList]</InOutArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="LogsDT">[io_LogsDT]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Out_Status">[TGRAGES_Status]</InArgument>
+                  <InArgument x:TypeArguments="ui:Browser" x:Key="in_BannerBrowserSession">[BrowserSession]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_AgingReportPath">[in_AgingReportPath]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="Out_AgingReportPath">[AgingReportFileName]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </If.Then>
+          </If>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="TransferAndFormatMainRefundFileExcelSheets" DisplayName="InvokeTransferAndFormatMainRefundFileExcelSheets workflow" sap:VirtualizedContainerService.HintSize="1033,143" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_37" UnSafe="False" WorkflowFileName="RefundFileManipulations\TransferAndFormatMainRefundFileExcelSheets.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+              </InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_StrOutputReportName" />
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">
+                <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_LogsDT" />
+              </InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogFilePath" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_AgingReport">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="AgingReportFileName" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_VDReport">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="VDFileName" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_HRReport">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_HRReportPath" />
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_DumpDupReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\DumpDup DumpGreen\refbank-dumpdups-20210119.csv</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_NonParticipationReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\Non Participant\Disbursement &amp; Participation 20201218 - Copy.XLSX</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_DumpGreenReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\DumpDup DumpGreen\refbank-dumpgreen-20210119.csv</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_DoNotRefundReport">
+                <Literal x:TypeArguments="x:String">\\loe.corp\ex\Departments\Bursar\Walden Finance\Receivables Management\AR Refunds\Reports\Banner Reports\Refund Files\RefundFileValidationBot\Sharepoint\Do No Refund\DONEDONEDONEMaster DNR.xlsx270121 04_06_35.xlsx270121 04_32_50.xlsx280121 12_06_48.xlsx</Literal>
+              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_RFReport">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RFFileName" />
+              </InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="io_MainRefundFileName">
+                <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="MainRefundFileName" />
+              </InOutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="609,313" sap2010:WorkflowViewState.IdRef="CommentOut_25">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="421,235" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="TransferAndFormatMainRefundFileExcelSheets" DisplayName="InvokeTransferAndFormatMainRefundFileExcelSheets workflow" sap:VirtualizedContainerService.HintSize="379,143" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_35" UnSafe="False" WorkflowFileName="RefundFileManipulations\TransferAndFormatMainRefundFileExcelSheets.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                      <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+                    </InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="out_StrOutputReportName" />
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_LogsDT">
+                      <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="io_LogsDT" />
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_LogFilePath" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_AgingReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="AgingReportFileName" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_VDReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="VDFileName" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_HRReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_HRReportPath" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_DumpDupReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DumpDupFileName" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_NonParticipationReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="NonParFiileName" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_DumpGreenReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DumpGreenFileName" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_DoNotRefundReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DNRFileName" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_RFReport">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="RFFileName" />
+                    </InArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="io_MainRefundFileName">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="MainRefundFileName" />
+                    </InOutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </ui:CommentOut.Body>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:CommentOut>
+          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="609,522" sap2010:WorkflowViewState.IdRef="CommentOut_16">
+            <ui:CommentOut.Body>
+              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="346,444" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence DisplayName="Download Non Participation Sequence" sap:VirtualizedContainerService.HintSize="304,352" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="NonParticipantPath" />
+                    <Variable x:TypeArguments="x:String" Name="LatestNonParticipationFileName" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[NonParticipantPath]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[in_Config("RFV_Non-ParticipantSharepointLocation").ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[LatestNonParticipationFileName]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[Directory.GetFiles(NonParticipantPath,"*.xlsx").OrderByDescending(Function(d) New FileInfo(d).LastWriteTime).Tolist(0)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[strSheetName]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[in_Config("SR_NonParticipantSheetName").ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </Sequence>
+            </ui:CommentOut.Body>
+          </ui:CommentOut>
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="609,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Description">Aging Report process finished</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1079,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="480,916" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="438,51" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                <ui:CommentOut.Body>
+                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,224" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap2010:Annotation.AnnotationText="Failures during the initialization are considered system exceptions and lead to the End Process state, thus finalizing the execution." DisplayName="Assign SystemException" sap:VirtualizedContainerService.HintSize="262,132" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="s:Exception">[SystemException]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="s:Exception">[Exception]</InArgument>
+                      </Assign.Value>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Assign>
+                  </Sequence>
+                </ui:CommentOut.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:CommentOut>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="438,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Description">["Exception occured due to : "+exception.Message.ToString]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <TryCatch sap2010:Annotation.AnnotationText="Take a screenshot of the current state of the screen to facilitate debugging." DisplayName="Try taking screenshot" sap:VirtualizedContainerService.HintSize="438,370" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                <TryCatch.Variables>
+                  <Variable x:TypeArguments="x:String" Name="ScreenshotPath" />
+                </TryCatch.Variables>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch.Try>
+                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke TakeScreenshot workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Framework\TakeScreenshot.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_Folder">[in_Config("ExScreenshotsFolderPath").ToString]</InArgument>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="io_FilePath">[ScreenshotPath]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="Exception" />
+                      </ActivityAction.Argument>
+                      <ui:LogMessage DisplayName="Log message (Screenshot not taken)" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Warn" Message="[&quot;Failed to take screenshot: &quot;+Exception.Message+&quot; at Source: &quot;+Exception.Source]" />
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>

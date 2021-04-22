@@ -1,0 +1,571 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="BannerParameterScreenshots" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:bem="clr-namespace:BalaReva.EasyExcel.Main;assembly=BalaReva.EasyExcel" xmlns:bes="clr-namespace:BalaReva.Excel.Sheets;assembly=BalaReva.Excel" xmlns:bew="clr-namespace:BalaReva.EasyExcel.WorkBook;assembly=BalaReva.EasyExcel" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_VDReportScreenshotFilepath" Type="InArgument(x:String)" />
+    <x:Property Name="in_AgingReportScreenshotFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_RFReportScreenshotFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="io_LogsDT" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_LogFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="io_RefundFile" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1699,5211</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>BannerParameterScreenshots_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="38">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>BalaReva.Excel.Enums</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>BalaReva.Excel.Sheets</x:String>
+      <x:String>BalaReva.Excel.Base</x:String>
+      <x:String>BalaReva.EasyExcel.Utilities</x:String>
+      <x:String>BalaReva.EasyExcel.Sheets</x:String>
+      <x:String>BalaReva.EasyExcel.Base</x:String>
+      <x:String>BalaReva.EasyExcel.Main</x:String>
+      <x:String>BalaReva.EasyExcel.WorkBook</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="33">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>BalaReva.Excel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>BalaReva.Excel.Base</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>BalaReva.EasyExcel.Utilities</AssemblyReference>
+      <AssemblyReference>BalaReva.EasyExcel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Parameter Screenshot" sap:VirtualizedContainerService.HintSize="1709,4986" sap2010:WorkflowViewState.IdRef="Sequence_53">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:WorkbookApplication" Name="Workbook_Main_Excel" />
+      <Variable x:TypeArguments="x:String" Name="Str_MainRefundFileReportParameterSheet1" />
+      <Variable x:TypeArguments="x:String" Name="Str_MainRefundFileSheet2" />
+      <Variable x:TypeArguments="ui:WorkbookApplication" Name="Macroworkbook" />
+      <Variable x:TypeArguments="x:String" Name="StrOutputDataParameters" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DTRefundMainReport" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1667,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Description">Banner parameter screenshots workflow started</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope Main Refund File Excel" sap:VirtualizedContainerService.HintSize="1667,947" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_3" InstanceCachePeriod="3000" Workbook="[Workbook_Main_Excel]" WorkbookPath="[io_RefundFile]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,838" sap2010:WorkflowViewState.IdRef="Sequence_43">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Description">["Opened main refind file excel :"+ io_RefundFile]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Opened Refund File Excel: &quot;+ io_RefundFile]" />
+            <Assign sap2010:Annotation.AnnotationText="Report Parameter Sheet" DisplayName="Assign Get the Sheet Name " sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="Assign_2">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Str_MainRefundFileReportParameterSheet1]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Workbook_Main_Excel.GetSheets(0)]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <Assign DisplayName="Assign Get the Sheet Name 2" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Str_MainRefundFileSheet2]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Workbook_Main_Excel.GetSheets(1)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[DTRefundMainReport]" DisplayName="Read Range Report Screenshot Sheet" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="[Str_MainRefundFileReportParameterSheet1]">
+              <ui:ExcelReadRange.Range>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </ui:ExcelReadRange.Range>
+            </ui:ExcelReadRange>
+            <ui:OutputDataTable sap2010:Annotation.AnnotationText="Store the all values from Report Screenshot Sheet" DataTable="[DTRefundMainReport]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="OutputDataTable_2" Text="[StrOutputDataParameters]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:OutputDataTable>
+            <ui:ExcelCloseWorkbook DisplayName="Close Refind File Workbook" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelCloseWorkbook_3" Workbook="[Workbook_Main_Excel]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ExcelApplicationScope>
+    <bes:DeleteSheet ExecutionResult="{x:Null}" FilePassword="{x:Null}" ModifyPassword="{x:Null}" ContinueOnError="True" Delay="5" DisplayName="Delete Report Parameter Sheet from Main Refund File Excel" FilePath="[io_RefundFile]" sap:VirtualizedContainerService.HintSize="1667,70" sap2010:WorkflowViewState.IdRef="DeleteSheet_1" SheetName="[Str_MainRefundFileReportParameterSheet1]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="1667,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="Report paramete sheet deleted from main refind file excel" />
+    <ui:ExcelApplicationScope Password="{x:Null}" AutoSave="False" DisplayName="Excel Application Scope Macro Screenshot To Excel in XLSM File type" sap:VirtualizedContainerService.HintSize="1667,2688" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_4" InstanceCachePeriod="3000" Workbook="[Macroworkbook]" WorkbookPath="[in_Config(&quot;RFV_MacroParamaterScreenshotFilePath&quot;).ToString]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Macro Screenshot " sap:VirtualizedContainerService.HintSize="1633,2579" sap2010:WorkflowViewState.IdRef="Sequence_51">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="Str_MacroScreenshotExcelSheetName" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1591,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Description">Report Parameter sheet deleted</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1591,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Description">Macro excel opened for insert banner parameter screenshot</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1591,51" sap2010:WorkflowViewState.IdRef="CommentOut_15">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,183" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign sap2010:Annotation.AnnotationText="Spliting newlines and Removed Empty entries. &#xA;Split Text Results:&#xA;1.RF% - REFUNDS,&#xA;2.VD% - VOIDS, &#xA;3.TGRATGRAGES - OPEN CREDIT GES" sap:VirtualizedContainerService.HintSize="262,162" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[StrOutputDataParameters]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[StrOutputDataParameters.Split( Environment.NewLine.ToCharArray, StringSplitOptions.RemoveEmptyEntries)]</InArgument>
+                    </Assign.Value>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Assign>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Spliting newlines and Removed Empty entries. &#xA;Split Text Results:&#xA;1.RF% - REFUNDS,&#xA;2.VD% - VOIDS, &#xA;3.TGRAGES - OPEN CREDIT." DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1591,1722" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[StrOutputDataParameters.Split( Environment.NewLine.ToCharArray, StringSplitOptions.RemoveEmptyEntries)]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:String">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:String" Name="Report" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Banner Parameters Screenshot(RF,VD and TGRAGES Report)" sap:VirtualizedContainerService.HintSize="1555,1502" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="RF" />
+                      <Variable x:TypeArguments="x:String" Name="VD" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1513,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Description">["Banner Report item: "+ Report]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Macro Excel Sheet Name" sap:VirtualizedContainerService.HintSize="1513,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[Str_MacroScreenshotExcelSheetName]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Macroworkbook.GetSheets(0)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap:VirtualizedContainerService.HintSize="1513,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[RF]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[in_Config("RFV_FolderNameRF").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign VD Value" sap:VirtualizedContainerService.HintSize="1513,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[VD]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[in_Config("RFV_FolderNameVD").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <If Condition="[Report.Trim.ToUpper.Contains( RF.Trim.ToUpper)]" DisplayName="If 'RF' Text contains is true or false" sap:VirtualizedContainerService.HintSize="1513,958" sap2010:WorkflowViewState.IdRef="If_21">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="RF Screenshot" sap:VirtualizedContainerService.HintSize="526,811" sap2010:WorkflowViewState.IdRef="Sequence_46">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Name="BoolEnableContentExists" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:UiElementExists DisplayName="Element Exists 'Button  Enable Content'" Exists="[BoolEnableContentExists]" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                            <ui:UiElementExists.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4d08c486-1a7d-4de4-8d28-95dcd2b58926" InformativeScreenshot="8fc72fa10ea1f42a494352745cf2093d" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' /&gt;&lt;uia cls='MsoCommandBar' name=' ' /&gt;&lt;uia cls='NetUIElement' name='Security Warning' /&gt;&lt;uia cls='NetUISimpleButton' name='Enable Content' /&gt;" WaitForReady="INTERACTIVE">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                              </ui:Target>
+                            </ui:UiElementExists.Target>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:UiElementExists>
+                          <If Condition="[BoolEnableContentExists]" sap:VirtualizedContainerService.HintSize="484,253" sap2010:WorkflowViewState.IdRef="If_22">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'Button  Enable Content'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                <ui:Click.CursorPosition>
+                                  <ui:CursorPosition Position="Center">
+                                    <ui:CursorPosition.OffsetX>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:CursorPosition.OffsetX>
+                                    <ui:CursorPosition.OffsetY>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:CursorPosition.OffsetY>
+                                  </ui:CursorPosition>
+                                </ui:Click.CursorPosition>
+                                <ui:Click.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6b749cfd-9dde-432a-9c54-beb274dac4b1" InformativeScreenshot="8fc72fa10ea1f42a494352745cf2093d" Selector="&lt;wnd app='excel.exe' cls='XLMAIN' /&gt;&lt;uia cls='MsoCommandBar' name=' ' /&gt;&lt;uia cls='NetUIElement' name='Security Warning' /&gt;&lt;uia cls='NetUISimpleButton' name='Enable Content' /&gt;">
+                                    <ui:Target.TimeoutMS>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:Target.TimeoutMS>
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:Click.Target>
+                              </ui:Click>
+                            </If.Then>
+                          </If>
+                          <ui:ExcelSelectRange DisplayName="Select Range" sap:VirtualizedContainerService.HintSize="484,59" sap2010:WorkflowViewState.IdRef="ExcelSelectRange_5" Range="A1" SheetName="[Str_MacroScreenshotExcelSheetName]" />
+                          <ui:ExecuteMacro ContinueOnError="{x:Null}" MacroOutput="{x:Null}" sap2010:Annotation.AnnotationText="Insert the RF Report screenshot png to Excel" DisplayName="Execute Macro" sap:VirtualizedContainerService.HintSize="484,90" sap2010:WorkflowViewState.IdRef="ExecuteMacro_9" MacroName="Sheet1.InsertImage" MacroParameters="[{  in_RFReportScreenshotFilePath, Report}]">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:ExecuteMacro>
+                          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="CommentOut_14">
+                            <ui:CommentOut.Body>
+                              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:ExecuteMacro ContinueOnError="{x:Null}" MacroOutput="{x:Null}" DisplayName="Execute Macro" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExecuteMacro_14" MacroName="Sheet1.InsertImage" MacroParameters="[{ in_RFReportScreenshotFilePath, string.Empty}]" />
+                              </Sequence>
+                            </ui:CommentOut.Body>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:CommentOut>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <If Condition="[Report.Trim.ToUpper.Contains( VD.Trim.ToUpper)]" DisplayName="If 'VD' Text contains is true or false" sap:VirtualizedContainerService.HintSize="942,476" sap2010:WorkflowViewState.IdRef="If_20">
+                          <If.Then>
+                            <Sequence DisplayName="VD Screenshot" sap:VirtualizedContainerService.HintSize="376,273" sap2010:WorkflowViewState.IdRef="Sequence_47">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:ExecuteMacro ContinueOnError="{x:Null}" MacroOutput="{x:Null}" sap2010:Annotation.AnnotationText="Insert the VD Report screenshot png to Excel" DisplayName="Execute Macro" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="ExecuteMacro_10" MacroName="Sheet1.InsertImage" MacroParameters="[{ in_RFReportScreenshotFilePath, Report}]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExecuteMacro>
+                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="CommentOut_12">
+                                <ui:CommentOut.Body>
+                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_54">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExecuteMacro ContinueOnError="{x:Null}" MacroOutput="{x:Null}" DisplayName="Execute Macro" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExecuteMacro_11" MacroName="Sheet1.InsertImage" MacroParameters="[{ in_RFReportScreenshotFilePath, string.Empty}]" />
+                                  </Sequence>
+                                </ui:CommentOut.Body>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:CommentOut>
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <If Condition="[Report.Trim.ToUpper.Contains( in_Config(&quot;RFV_AgingAnalysisReport_Tcode&quot;).ToString.ToUpper.Trim)]" DisplayName="If 'TGRADES' Text contains is true or false" sap:VirtualizedContainerService.HintSize="521,329" sap2010:WorkflowViewState.IdRef="If_19">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <Sequence DisplayName="Aging Screenshot" sap:VirtualizedContainerService.HintSize="376,182" sap2010:WorkflowViewState.IdRef="Sequence_48">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExecuteMacro ContinueOnError="{x:Null}" MacroOutput="{x:Null}" sap2010:Annotation.AnnotationText="Insert the Aging Report screenshot png to Excel" DisplayName="Execute Macro" sap:VirtualizedContainerService.HintSize="334,90" sap2010:WorkflowViewState.IdRef="ExecuteMacro_12" MacroName="Sheet1.InsertImage" MacroParameters="[{ in_AgingReportScreenshotFilePath, Report}]">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ExecuteMacro>
+                                </Sequence>
+                              </If.Then>
+                            </If>
+                          </If.Else>
+                        </If>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
+            <ui:ExcelCopySheet sap2010:Annotation.AnnotationText="Copy the sheet from Macro xlsm file and Paste into Main Refind File Excel" DestinationFilePath="[io_RefundFile]" DestinationSheetName="[Str_MainRefundFileReportParameterSheet1]" DisplayName="Copy Sheet" sap:VirtualizedContainerService.HintSize="1591,79" sap2010:WorkflowViewState.IdRef="ExcelCopySheet_2" SheetName="[Str_MacroScreenshotExcelSheetName]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ExcelCopySheet>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1591,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Description">Successfully copied parameter screenshot from macro excel and pasted into main refund file excel</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:ExcelCloseWorkbook DisplayName="Close Macro Screenshot Workbook" sap:VirtualizedContainerService.HintSize="1591,59" sap2010:WorkflowViewState.IdRef="ExcelCloseWorkbook_4" Workbook="[Macroworkbook]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ExcelApplicationScope>
+    <bem:ExcelScope FilePassword="{x:Null}" ModifyPassword="{x:Null}" DisplayName="Excel Scope Main Refund File" FilePath="[io_RefundFile]" sap:VirtualizedContainerService.HintSize="1667,360" sap2010:WorkflowViewState.IdRef="ExcelScope_1" Visible="True">
+      <bem:ExcelScope.Body>
+        <ActivityAction x:TypeArguments="bem:ExcelParam">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="bem:ExcelParam" Name="WorkBookObj" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Report Parameter Sheet" sap:VirtualizedContainerService.HintSize="326,218" sap2010:WorkflowViewState.IdRef="Sequence_52">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <bew:MoveSheet sap2010:Annotation.AnnotationText="Move the report parameter sheet to start in same Main refind file excel" BeforeSheet="[Str_MainRefundFileSheet2]" ContinueOnError="False" Delay="3" DisplayName="Move Sheet" sap:VirtualizedContainerService.HintSize="284,126" sap2010:WorkflowViewState.IdRef="MoveSheet_1" SheetName="[Str_MainRefundFileReportParameterSheet1]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </bew:MoveSheet>
+          </Sequence>
+        </ActivityAction>
+      </bem:ExcelScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </bem:ExcelScope>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1667,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Description">Successfully moved report parameter sheet in same main refund file excel</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1667,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">Success</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Description" xml:space="preserve">Successfully saved banner report parameter screeenshot </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke CreateLogs workflow" sap:VirtualizedContainerService.HintSize="1667,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="Reusable\CreateLogs.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_ConfigDictionary">[in_Config]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Instance">Refund File Validation BOT</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Status">N/A</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Description">Banner parameter screenshots workflow finished</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Environment">[in_Config("RFV_Environment").ToString]</InArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inOut_LogDT">[io_LogsDT]</InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_LogFilePath">[in_LogFilePath]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+  </Sequence>
+</Activity>
